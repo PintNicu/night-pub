@@ -1,0 +1,29 @@
+.facebook {
+  color: #3b5998;
+}
+
+.instagram {
+  color: #dd2a7b;
+}
+
+.tripadvisor {
+  color: #00b388;
+}
+
+.aElement {
+  font-size: 4.5em;
+  padding: 3rem;
+}
+
+.facebook:hover,
+.instagram:hover,
+.tripadvisor:hover {
+  color: #d5d5d5;
+}
+
+@media (max-width: 768px) {
+  .aElement {
+    font-size: 2.5em;
+    padding: 1.2rem;
+  }
+}

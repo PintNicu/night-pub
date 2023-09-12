@@ -1,0 +1,26 @@
+.navbarContainer {
+  padding: 0.8rem;
+}
+
+.navLink {
+  padding-right: 20px;
+}
+
+.navbarNav .navLink {
+  margin-right: 1.2rem;
+  font-size: 1.1rem;
+}
+
+.navbarNav {
+  justify-content: flex-end;
+}
+
+@media (max-width: 822px) {
+  .navbarNav .navLink {
+    font-size: 0.9rem;
+  }
+  .navbarContainer {
+    margin-left: 0.8rem;
+    justify-content: flex-end;
+  }
+}

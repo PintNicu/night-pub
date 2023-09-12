@@ -1,0 +1,35 @@
+.formCard {
+  padding: 5%;
+}
+.formColumns {
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+}
+.formColumn {
+  padding: 20px;
+}
+.icon {
+  font-size: 20px;
+  padding-right: 1rem;
+}
+.adressColumn {
+  background-color: #222;
+  color: #dedede;
+  padding: 20px;
+}
+
+input.inputError,
+textarea.inputError,
+select.inputError {
+  border-color: #fc8181;
+}
+
+.error {
+  font-size: 0.8em;
+  color: #fc8181;
+}
+
+@media (max-width: 995px) {
+  .emailInfo {
+    font-size: 0.9rem;
+  }
+}

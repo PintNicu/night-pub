@@ -1,0 +1,20 @@
+footer {
+  display: block;
+  color: aliceblue;
+}
+
+.footerLogo {
+  width: 78px;
+  height: auto;
+}
+@media (max-width: 822px) {
+  p {
+    font-size: 0.9rem;
+  }
+}
+@media (max-width: 380px) {
+  .footerIframe {
+    width: auto;
+    height: auto;
+  }
+}

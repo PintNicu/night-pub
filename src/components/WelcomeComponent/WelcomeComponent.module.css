@@ -1,0 +1,7 @@
+.welcomeComponentContainer {
+  margin-top: 2rem;
+}
+.welcomeComponentHr {
+  border-top: 4px solid #b4b4b4 !important;
+  margin-top: 0.3rem;
+}

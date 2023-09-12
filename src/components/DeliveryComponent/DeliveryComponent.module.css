@@ -1,0 +1,19 @@
+.deliveryComponentContainer {
+  margin-top: 2rem !important;
+}
+
+.glovo {
+  width: 8em;
+  height: auto;
+}
+@media (max-width: 768px) {
+  .glovo {
+    width: 80px;
+    height: 80px;
+  }
+
+  .glv {
+    font-size: 14px;
+    padding: 4px 8px;
+  }
+}
