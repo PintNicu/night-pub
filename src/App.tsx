@@ -4,7 +4,7 @@ import { Routes, Route } from "react-router-dom";
 import { Container } from "react-bootstrap";
 import Home from "./pages/Home";
 import AboutUs from "./pages/AboutUs";
-import Menu from "./pages/Menu/Menu";
+import Menu from "./pages/Menu";
 import Events from "./pages/Events";
 import Gallery from "./pages/Gallery";
 import Contact from "./pages/Contact";

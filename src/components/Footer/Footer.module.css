@@ -7,14 +7,20 @@ footer {
   width: 78px;
   height: auto;
 }
+
+.footerFrame{
+  max-height: 12rem;
+}
+
+
 @media (max-width: 822px) {
   p {
     font-size: 0.9rem;
   }
 }
-@media (max-width: 380px) {
+/* @media (max-width: 380px) {
   .footerIframe {
     width: auto;
     height: auto;
   }
-}
+} */

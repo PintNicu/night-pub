@@ -5,9 +5,16 @@ import Image from 'react-bootstrap/Image';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import { useState } from "react";
+import styles from "./DynamicGallery.module.css"
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faChevronRight } from '@fortawesome/free-solid-svg-icons';
+
+
+
+
 
 function DynamicGallery() {
-  const imageContext = (require as any).context('../images', false, /\.(jpg|jpeg|webp)$/);
+  const imageContext = (require as any).context("../../Images/GalleryImages", false, /\.(jpg|jpeg|webp)$/);
   const images: string[] = imageContext.keys().map(imageContext);
 
   const [showImg, setShowImg] = useState(false);
@@ -40,35 +47,22 @@ function DynamicGallery() {
     <div>
       <Container>
         <Row>
-          {images.map((imgSrc, index) => (
+          {images.map((imageDir, index) => (
             <Col lg={4} md={4} sm={6} xs={12} key={index} className="mb-4">
               <div
-                // className="image-container"
-                style={{
-                  paddingBottom: "75%", // Aspect ratio 4:3
-                  position: "relative",
-                  overflow: "hidden",
-                  cursor: "pointer",
-                }}
+                className={styles.imageContainer}
                 onClick={() => handleShow(index)}
               >
                 <Image
-                  src={imgSrc}
-                  style={{
-                    position: "absolute",
-                    top: 0,
-                    left: 0,
-                    width: "100%",
-                    height: "100%",
-                    objectFit: "cover",
-                  }}
+                  src={imageDir}
+                  className={styles.gridImage}
                 />
               </div>
             </Col>
           ))}
         </Row>
 
-        <Modal show={showImg} onHide={() => setShowImg(false)} size="lg">
+        <Modal show={showImg} onHide={() => setShowImg(false)} size="lg"  >
           <Modal.Body>
             <img
               src={images[selectedImgIndex]}
@@ -77,11 +71,11 @@ function DynamicGallery() {
             />
           </Modal.Body>
           <Modal.Footer>
-            <Button variant="secondary" onClick={handlePrevious}>
-              Previous
+            <Button variant="dark" onClick={handlePrevious}>
+              <FontAwesomeIcon icon={faChevronRight} rotation={180} />
             </Button>
-            <Button variant="secondary" onClick={handleNext}>
-              Next
+            <Button variant="dark" onClick={handleNext}>
+              <FontAwesomeIcon icon={faChevronRight} />
             </Button>
           </Modal.Footer>
         </Modal>
