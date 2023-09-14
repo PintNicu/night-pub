@@ -12,6 +12,7 @@ function MenuIframe() {
             allowFullScreen={true}
             loading="lazy"
             referrerPolicy="no-referrer-when-downgrade"
+            title="MenuIframe"
           ></iframe>
         </Col>
       </Row>

@@ -1,5 +1,5 @@
 .navbarContainer {
-  padding: 0.8rem;
+ align-items: flex-start;
 }
 
 .navLink {
@@ -15,12 +15,23 @@
   justify-content: flex-end;
 }
 
+.hiddenButton {
+  background-color: transparent;
+  border: none;
+  color: inherit;
+}
+
 @media (max-width: 822px) {
-  .navbarNav .navLink {
-    font-size: 0.9rem;
-  }
   .navbarContainer {
     margin-left: 0.8rem;
-    justify-content: flex-end;
+    align-items: flex-end;
   }
+  .navbarNav .navLink {
+    font-size: 0.9rem;
+    padding-right: 0;
+  }
+  .navLink {
+    padding-right: 0px;
+  }
+
 }

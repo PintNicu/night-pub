@@ -1,6 +1,7 @@
 footer {
   display: block;
   color: aliceblue;
+  overflow: hidden;
 }
 
 .footerLogo {
@@ -10,8 +11,12 @@ footer {
 
 .footerFrame{
   max-height: 12rem;
+  overflow: hidden;
 }
 
+.footerColumn{
+  word-break: break-all;
+}
 
 @media (max-width: 822px) {
   p {

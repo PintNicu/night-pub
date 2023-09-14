@@ -1,7 +1,6 @@
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Routes, Route } from "react-router-dom";
-import { Container } from "react-bootstrap";
 import Home from "./pages/Home";
 import AboutUs from "./pages/AboutUs";
 import Menu from "./pages/Menu";
@@ -13,7 +12,7 @@ import Footer from "./components/Footer/Footer";
 
 function App() {
   return (
-    <div className="mainDiv">
+    <div className="mainDiv" >
       <Navbar />
       <div>
         <Routes>

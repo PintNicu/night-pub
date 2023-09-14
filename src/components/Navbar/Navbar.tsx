@@ -3,14 +3,26 @@ import {
   Nav,
   Navbar as NavbarUI,
 } from "react-bootstrap";
+import { useState } from 'react';
+import Button from "react-bootstrap/Button";
 import { NavLink } from "react-router-dom";
 import NavBrand from "./NavbarBrand/NavBrand";
 import styles from "./Navbar.module.css";
+import LoginModal from "../LoginModule/LoginModal";
 
 function Navbar() {
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+
+
   return (
+    <>
     <NavbarUI collapseOnSelect expand="md" bg="black" variant="dark">
-      <NavBrand />
+      <Button onClick={handleShow} className={styles.hiddenButton} variant="dark">
+        <NavBrand />
+      </Button>
       <NavbarUI.Toggle aria-controls="responsive-navbar-nav" />
       <NavbarUI.Collapse id="responsive-navbar-nav">
         <NavContainer className={styles.navbarContainer}>
@@ -37,6 +49,8 @@ function Navbar() {
         </NavContainer>
       </NavbarUI.Collapse>
     </NavbarUI>
+    <LoginModal show={show} handleClose={handleClose} />
+    </>
   );
 }
 

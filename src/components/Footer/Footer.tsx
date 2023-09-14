@@ -33,6 +33,7 @@ function Footer() {
                 allowFullScreen
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"
+                title="pubLocation"
               ></iframe>
             </Ratio>
           </Col>

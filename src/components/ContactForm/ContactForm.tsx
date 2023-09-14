@@ -4,7 +4,6 @@ import Col from "react-bootstrap/Col";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import styles from "./ContactForm.module.css";
-import * as yup from "yup";
 import { useFormik } from "formik";
 import { FormikHelpers } from "formik";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
