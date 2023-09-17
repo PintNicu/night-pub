@@ -2,14 +2,23 @@ import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import { useRef } from "react";
+import { useAuth } from '../contexts/AuthContext'
 import PropTypes from 'prop-types';
 
 
 function LoginModal(props: any) {
-  // const [show, setShow] = useState(false);
+  
+  const { signIn } = useAuth();
 
-  // const handleClose = () => setShow(false);
-  // const handleShow = () => setShow(true);
+  const handleSubmit = async (event: any) => {
+    event.preventDefault();
+    try {
+      await signIn(usernameRef.current?.value || "", passwordRef.current?.value || "");
+      props.handleClose();
+    } catch (error) {
+      console.log("Failed to login: ", error);
+    }
+  };
 
   const usernameRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
@@ -21,9 +30,10 @@ function LoginModal(props: any) {
         <Modal.Title>Log In</Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <Form>
+        {/* Attach the onSubmit event handler */}
+        <Form onSubmit={handleSubmit}>
           <Form.Group id="username">
-            <Form.Label>Username</Form.Label>
+            <Form.Label>Email</Form.Label>
             <Form.Control type="username" ref={usernameRef} required />
           </Form.Group>
           <Form.Group id="password">
@@ -36,7 +46,8 @@ function LoginModal(props: any) {
         <Button variant="secondary" onClick={props.handleClose}>
           Close
         </Button>
-        <Button variant="dark" type="submit">
+        {/* This should now trigger handleSubmit when clicked */}
+        <Button variant="dark" type="submit" onClick={handleSubmit}>
           Sign In
         </Button>
       </Modal.Footer>

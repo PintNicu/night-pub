@@ -1,5 +1,5 @@
-import firebase from 'firebase/app';
-import 'firebase/auth';
+import { initializeApp } from 'firebase/app';
+import { getAuth, signInWithEmailAndPassword as signInWithEmailAndPasswordFirebase, signOut as signOutFirebase } from 'firebase/auth';
 
 const config = {
   apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
@@ -9,8 +9,28 @@ const config = {
   messagingSenderId: process.env.REACT_MESSAGING_SENDER_ID,
   appId: process.env.REACT_APP_ID,
 };
-const app = firebase.initializeApp(config);
 
+const app = initializeApp(config);
+const auth = getAuth(app);
 
-export const auth = (app as any).auth();
-export default app;
+export const signInWithEmailAndPassword = async (email: string, password: string) => {
+  try {
+    const userCredential = await signInWithEmailAndPasswordFirebase(auth, email, password);
+    return userCredential;
+  } catch (error) {
+    console.error("Error signing in:", error);
+    throw error;
+  }
+};
+
+export const signOut = async () => {
+  try {
+    await signOutFirebase(auth);
+    console.log("Successfully signed out.");
+  } catch (error) {
+    console.error("Error signing out:", error);
+    throw error;
+  }
+};
+
+export { auth };

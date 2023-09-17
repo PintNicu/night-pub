@@ -1,3 +1,4 @@
+import { useRef } from "react";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
@@ -14,6 +15,9 @@ import {
   faEnvelope,
 } from "@fortawesome/free-solid-svg-icons";
 import ContactFormValidation from "../../validations/ContactFormValidation"; /* schema */
+import emailjs from '@emailjs/browser';
+
+
 
 interface MyFormValues {
   name: string;
@@ -51,6 +55,8 @@ function ContactComponent() {
     validationSchema: ContactFormValidation /* schema */,
     onSubmit,
   });
+
+  const form = useRef();
 
   console.log(errors);
   return (
