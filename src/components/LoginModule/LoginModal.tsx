@@ -1,22 +1,25 @@
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
-import { useRef } from "react";
+import Alert from "react-bootstrap/Alert"
+import { useRef, useState } from "react";
 import { useAuth } from '../contexts/AuthContext'
 import PropTypes from 'prop-types';
 
 
 function LoginModal(props: any) {
-  
+  const [error, setError] = useState('')
   const { signIn } = useAuth();
 
   const handleSubmit = async (event: any) => {
     event.preventDefault();
     try {
+      setError("")
       await signIn(usernameRef.current?.value || "", passwordRef.current?.value || "");
       props.handleClose();
     } catch (error) {
       console.log("Failed to login: ", error);
+      setError("Vă rugăm reâncercați")
     }
   };
 
@@ -40,6 +43,7 @@ function LoginModal(props: any) {
             <Form.Label>Password</Form.Label>
             <Form.Control type="password" ref={passwordRef} required />
           </Form.Group>
+          {error && <Alert variant="danger">{error}</Alert>}
         </Form>
       </Modal.Body>
       <Modal.Footer>

@@ -1,4 +1,3 @@
-import { useRef } from "react";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
@@ -15,9 +14,7 @@ import {
   faEnvelope,
 } from "@fortawesome/free-solid-svg-icons";
 import ContactFormValidation from "../../validations/ContactFormValidation"; /* schema */
-import emailjs from '@emailjs/browser';
-
-
+import emailjs from '@emailjs/browser'
 
 interface MyFormValues {
   name: string;
@@ -32,6 +29,15 @@ const onSubmit = async (
 ) => {
   console.log(values);
   console.log(actions);
+
+  emailjs.sendForm("service_4pidr1e", 'template_clkvu4b', '#your-form-id', 'S5qxBAPukSy0uEAkE')
+    .then((result: any) => {
+      console.log(result.text);
+      console.log("message sent")
+    }, (error: any) => {
+      console.log(error.text);
+    });
+
   await new Promise((resolve) => setTimeout(resolve, 1000));
   actions.resetForm();
 };
@@ -56,8 +62,6 @@ function ContactComponent() {
     onSubmit,
   });
 
-  const form = useRef();
-
   console.log(errors);
   return (
     <Container className={`block ${styles.formCard}`}>
@@ -65,10 +69,11 @@ function ContactComponent() {
         <Col md={7} className={styles.formColumn}>
           <h4>Lasă-ne un mesaj</h4>
           <hr />
-          <Form onSubmit={handleSubmit} autoComplete="off">
+          <Form id="your-form-id" onSubmit={handleSubmit} autoComplete="off" >
             <Form.Label>Nume</Form.Label>
             <Form.Group className="mb-3">
               <Form.Control
+                name="name"
                 type="text"
                 placeholder="Numele dumneavoastră"
                 id="name"
@@ -86,6 +91,7 @@ function ContactComponent() {
             <Form.Group className="mb-3">
               <Form.Label>Email</Form.Label>
               <Form.Control
+                name="email"
                 type="email"
                 placeholder="Adresa de e-mail"
                 id="email"
@@ -105,6 +111,7 @@ function ContactComponent() {
             <Form.Group className="mb-3">
               <Form.Label>Telefon</Form.Label>
               <Form.Control
+                name="phoneNumber"
                 type="phoneNumber"
                 id="phoneNumber"
                 placeholder="Numărul de contact"
@@ -124,6 +131,7 @@ function ContactComponent() {
             <Form.Group className="mb-3">
               <Form.Label>Mesajul</Form.Label>
               <Form.Control
+                name="message"
                 as="textarea"
                 type="text"
                 spellCheck="false"
@@ -140,7 +148,7 @@ function ContactComponent() {
                 <p className={styles.error}>{errors.message}</p>
               )}
             </Form.Group>
-            <Button disabled={isSubmitting} variant="dark" type="submit">
+            <Button disabled={isSubmitting} variant="dark" type="submit" value="Send">
               Trimite
             </Button>
           </Form>
