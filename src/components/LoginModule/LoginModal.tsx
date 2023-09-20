@@ -5,11 +5,12 @@ import Alert from "react-bootstrap/Alert"
 import { useRef, useState } from "react";
 import { useAuth } from '../contexts/AuthContext'
 import PropTypes from 'prop-types';
-
+import { useNavigate } from 'react-router-dom';
 
 function LoginModal(props: any) {
   const [error, setError] = useState('')
   const { signIn } = useAuth();
+  const navigate =useNavigate()
 
   const handleSubmit = async (event: any) => {
     event.preventDefault();
@@ -17,6 +18,7 @@ function LoginModal(props: any) {
       setError("")
       await signIn(usernameRef.current?.value || "", passwordRef.current?.value || "");
       props.handleClose();
+      navigate("/Dashboard");
     } catch (error) {
       console.log("Failed to login: ", error);
       setError("Vă rugăm reâncercați")

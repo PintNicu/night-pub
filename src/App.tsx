@@ -9,9 +9,13 @@ import Gallery from "./pages/Gallery";
 import Contact from "./pages/Contact";
 import Navbar from "./components/Navbar/Navbar";
 import Footer from "./components/Footer/Footer";
+import Dashboard from "./pages/Dahsboard";
+import PrivateRoute from "./components/PrivateRoute/PrivateRoute";
+import { AuthProvider } from "./components/contexts/AuthContext";
 
 function App() {
   return (
+    <AuthProvider>
     <div className="mainDiv" >
       <Navbar />
       <div>
@@ -22,10 +26,19 @@ function App() {
           <Route path="/Events" element={<Events />} />
           <Route path="/Gallery" element={<Gallery />} />
           <Route path="/Contact" element={<Contact />} />
+          <Route 
+              path="/Dashboard" 
+              element={
+                <PrivateRoute>
+                  <Dashboard />
+                </PrivateRoute>
+              } 
+            />
         </Routes>
       </div>
       <Footer />
     </div>
+    </AuthProvider>
   );
 }
 
