@@ -34,6 +34,7 @@ function ImageUploader() {
       const imageRef = ref(storage, `gallery/${imageUpload.name + randomNumber}`)
       uploadBytes(imageRef, imageUpload).then(() => {
         alert("Image Uploaded");
+        setSelectedImages([]);
       });
     }
 
@@ -59,13 +60,13 @@ function ImageUploader() {
   </Form.Group>
   <Container className={styles.centerEverything}>
     {selectedImages && selectedImages.map((image, index) => {
-        return (
-            <Container key={image} className={styles.images}>
-          <img src={image} height="100" alt="upload" className={styles.image} />
-          <Button className={styles.buttonRemove} variant="outline-warning" onClick={() => removeImageHandler(image)}>
-            <FontAwesomeIcon icon={faTrashCan} style={{color: "#da0b0b"}} />
-          </Button>
-        </Container>
+    return (
+      <Container key={image} className={styles.images}>
+        <img src={image} height="100" alt="upload" className={styles.image} key={index} />
+        <Button className={styles.buttonRemove} variant="outline-warning" onClick={() => removeImageHandler(image)}>
+          <FontAwesomeIcon icon={faTrashCan} style={{color: "#da0b0b"}} />
+        </Button>
+      </Container>
       )
     })}
   </Container>

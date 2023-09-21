@@ -4,16 +4,18 @@ import Col from 'react-bootstrap/Col';
 import Image from 'react-bootstrap/Image';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import styles from "./DynamicGallery.module.css"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronRight } from '@fortawesome/free-solid-svg-icons';
+import { getStorage, ref, listAll, getDownloadURL } from "firebase/storage";
 
 
 
 
 
 function DynamicGallery() {
+  const [firebaseImages, setFirebaseImages] = useState<string[]>([]);
   const imageContext = (require as any).context("../../Images/GalleryImages", false, /\.(jpg|jpeg|webp)$/);
   const images: string[] = imageContext.keys().map(imageContext);
 
@@ -43,11 +45,33 @@ function DynamicGallery() {
     });
   };
 
+  useEffect(() => {
+    const storage = getStorage();
+    const imageListRef = ref(storage, 'gallery'); 
+
+    listAll(imageListRef)
+      .then((res) => {
+        const urlPromises = res.items.map((imageRef) => {
+          return getDownloadURL(imageRef);
+        });
+  
+        Promise.all(urlPromises)
+          .then((urls) => {
+            setFirebaseImages(urls);
+          })
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
+
+  const completeGallery = [...images, ...firebaseImages];
+
   return (
     <div>
       <Container>
         <Row>
-          {images.map((imageDir, index) => (
+          {completeGallery.map((imageDir, index) => (
             <Col lg={4} md={4} sm={6} xs={12} key={index} className="mb-4">
               <div
                 className={styles.imageContainer}
