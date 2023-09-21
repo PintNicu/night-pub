@@ -15,6 +15,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import ContactFormValidation from "../../validations/ContactFormValidation"; /* schema */
 import emailjs from '@emailjs/browser'
+import { useEditableInfo } from "../contexts/EditeableInfoContext";
 
 interface MyFormValues {
   name: string;
@@ -63,7 +64,10 @@ function ContactComponent() {
   });
 
   console.log(errors);
+  const { editableInfo } = useEditableInfo();
+
   return (
+    
     <Container className={`block ${styles.formCard}`}>
       <Row className={`form ${styles.formColumns}`}>
         <Col md={7} className={styles.formColumn}>
@@ -161,17 +165,17 @@ function ContactComponent() {
             <div className="d-flex">
               <FontAwesomeIcon icon={faLocationDot} className={styles.icon} />
               <p>
-                Adresa noastră: Strada. Slobozia, Nr. 15, Sector 4, București
+                {editableInfo.cFormAdress}
               </p>
             </div>
             <div className="d-flex">
               <FontAwesomeIcon icon={faPhone} className={styles.icon} />
-              <p>Contact: +4 0765 255 801 </p>
+              <p>{editableInfo.cPhone}</p>
             </div>
             <div className="d-flex">
               <FontAwesomeIcon icon={faEnvelope} className={styles.icon} />
               <p className={styles.emailInfo}>
-                Email: casazepelin1929@gmail.com
+                {editableInfo.cEmail}
               </p>
             </div>
             <hr />
@@ -180,13 +184,13 @@ function ContactComponent() {
               <p>Program:</p>
             </div>
             <div className="d-flex">
-              <p>Luni - Joi: 12:01 - 00:01</p>
+              <p>{editableInfo.programMT}</p>
             </div>
             <div className="d-flex">
-              <p>Vineri - Sâmbătă: 12:01 - 05:00</p>
+              <p>{editableInfo.programFS}</p>
             </div>
             <div className="d-flex">
-              <p>Duminică: 12:01 - 00:00</p>
+              <p>{editableInfo.programSM}</p>
             </div>
           </div>
         </Col>

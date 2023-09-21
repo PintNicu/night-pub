@@ -12,13 +12,13 @@ import Footer from "./components/Footer/Footer";
 import Dashboard from "./pages/Dahsboard";
 import PrivateRoute from "./components/PrivateRoute/PrivateRoute";
 import { AuthProvider } from "./components/contexts/AuthContext";
-import { FooterInfoProvider } from "./components/contexts/FooterInfoContext";
+import { EditableInfoProvider } from "./components/contexts/EditeableInfoContext";
 
 
 function App() {
   return (
     <AuthProvider>
-    <FooterInfoProvider>
+    <EditableInfoProvider>
     <div className="mainDiv" >
       <Navbar />
       <div>
@@ -41,7 +41,7 @@ function App() {
       </div>
       <Footer />
     </div>
-    </FooterInfoProvider>
+    </EditableInfoProvider>
     </AuthProvider>
   );
 }

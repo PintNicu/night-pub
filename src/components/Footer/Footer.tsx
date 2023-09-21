@@ -4,10 +4,10 @@ import Col from "react-bootstrap/Col";
 import logo2 from "../../Images/Logo/zeplogo2.png";
 import Ratio from "react-bootstrap/Ratio"
 import styles from "./Footer.module.css";
-import { useFooterInfo } from "../contexts/FooterInfoContext";
+import { useEditableInfo } from "../contexts/EditeableInfoContext";
 
 function Footer() {
-  const { footerInfo } = useFooterInfo();
+  const { editableInfo } = useEditableInfo();
   
   return (
     <footer className="main-footer mt-auto bg-black">
@@ -16,17 +16,17 @@ function Footer() {
           <Col md={4} className={`p-4 ${styles.footerColumn}`}>
             <img src={logo2} alt="" className={styles.footerLogo} />
             <hr className="light" />
-            <p>{footerInfo.phone}</p>
-            <p>{footerInfo.email}</p>
-            <p>{footerInfo.address}</p>
+            <p>{editableInfo.phone}</p>
+            <p>{editableInfo.email}</p>
+            <p>{editableInfo.address}</p>
           </Col>
           <Col md={4} className={`p-4 ${styles.footerColumn}`}>
             <hr className="light" />
             <h5>Program</h5>
             <hr className="light" />
-            <p>{footerInfo.programMT}</p>
-            <p>{footerInfo.programFS}</p>
-            <p>{footerInfo.programSM}</p>
+            <p>{editableInfo.programMT}</p>
+            <p>{editableInfo.programFS}</p>
+            <p>{editableInfo.programSM}</p>
           </Col>
           <Col md={4} className={`p-4 ${styles.footerColumn} fluid`}>
             <Ratio className={`frame ${styles.footerFrame}`}>

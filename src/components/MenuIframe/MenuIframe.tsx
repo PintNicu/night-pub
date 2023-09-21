@@ -2,13 +2,18 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import styles from "./MenuIframe.module.css"
+import { useEditableInfo  } from "../contexts/EditeableInfoContext";
+
+
 function MenuIframe() {
-    return (
+  const { editableInfo } = useEditableInfo ();
+
+  return (
     <Container fluid className={styles.iframeContainer}>
       <Row className="justify-content-center" >
         <Col xs={12}>
           <iframe className={styles.iframe}
-            src="https://digitalmenucheck.com/14e9ca9b-2188-42e1-9a64-d26a8b895f22/index.html"
+            src={editableInfo.menuLink}
             allowFullScreen={true}
             loading="lazy"
             referrerPolicy="no-referrer-when-downgrade"
@@ -17,7 +22,7 @@ function MenuIframe() {
         </Col>
       </Row>
     </Container>
-      );
+  );
 }
 
 export default MenuIframe
