@@ -1,5 +1,6 @@
 import { initializeApp } from 'firebase/app';
 import { getAuth, signInWithEmailAndPassword as signInWithEmailAndPasswordFirebase, signOut as signOutFirebase } from 'firebase/auth';
+import { getStorage } from 'firebase/storage'
 
 const config = {
   apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
@@ -12,6 +13,7 @@ const config = {
 
 const app = initializeApp(config);
 const auth = getAuth(app);
+const storage = getStorage(app);
 
 export const signInWithEmailAndPassword = async (email: string, password: string) => {
   try {
@@ -34,3 +36,4 @@ export const signOut = async () => {
 };
 
 export { auth };
+export { storage };

@@ -1,0 +1,28 @@
+.images {
+    position: relative;
+    display: inline-block;  /* To make the Container inline */
+    text-align: center;
+   
+  }
+  
+  .image {
+    margin-top: 1rem;
+  }
+  
+  .buttonRemove {
+    position: absolute;
+    bottom: 0;
+  }
+  
+  .imageNumber {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+  }
+  
+  .centerEverything {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }

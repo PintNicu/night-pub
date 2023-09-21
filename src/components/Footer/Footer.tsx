@@ -1,12 +1,14 @@
-import React from "react";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import logo2 from "../../Images/Logo/zeplogo2.png";
 import Ratio from "react-bootstrap/Ratio"
 import styles from "./Footer.module.css";
+import { useFooterInfo } from "../contexts/FooterInfoContext";
 
 function Footer() {
+  const { footerInfo } = useFooterInfo();
+  
   return (
     <footer className="main-footer mt-auto bg-black">
       <Container className={styles.footerContainer}>
@@ -14,17 +16,17 @@ function Footer() {
           <Col md={4} className={`p-4 ${styles.footerColumn}`}>
             <img src={logo2} alt="" className={styles.footerLogo} />
             <hr className="light" />
-            <p>Tel. 0765 255 801</p>
-            <p>casazepelin1929@gmail.com</p>
-            <p>Strada. Slobozia | Nr. 15 | Sector 4 | București</p>
+            <p>{footerInfo.phone}</p>
+            <p>{footerInfo.email}</p>
+            <p>{footerInfo.address}</p>
           </Col>
           <Col md={4} className={`p-4 ${styles.footerColumn}`}>
             <hr className="light" />
             <h5>Program</h5>
             <hr className="light" />
-            <p>Luni - Joi: 12:01 - 00:01</p>
-            <p>Vineri - Sâmbătă: 12:01 - 05:00</p>
-            <p>Duminică: 12:01 - 00:00</p>
+            <p>{footerInfo.programMT}</p>
+            <p>{footerInfo.programFS}</p>
+            <p>{footerInfo.programSM}</p>
           </Col>
           <Col md={4} className={`p-4 ${styles.footerColumn} fluid`}>
             <Ratio className={`frame ${styles.footerFrame}`}>

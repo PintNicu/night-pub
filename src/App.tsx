@@ -12,10 +12,13 @@ import Footer from "./components/Footer/Footer";
 import Dashboard from "./pages/Dahsboard";
 import PrivateRoute from "./components/PrivateRoute/PrivateRoute";
 import { AuthProvider } from "./components/contexts/AuthContext";
+import { FooterInfoProvider } from "./components/contexts/FooterInfoContext";
+
 
 function App() {
   return (
     <AuthProvider>
+    <FooterInfoProvider>
     <div className="mainDiv" >
       <Navbar />
       <div>
@@ -38,6 +41,7 @@ function App() {
       </div>
       <Footer />
     </div>
+    </FooterInfoProvider>
     </AuthProvider>
   );
 }
