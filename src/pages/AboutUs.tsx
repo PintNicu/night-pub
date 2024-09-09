@@ -1,7 +1,14 @@
+import React from 'react';
+import StoryRoll from '../components/Stories/StoryRoll';
+
+
 function AboutUs() {
-  return <h1>Desrpe NoiDesrpe</h1>;
+
+  return (
+    <>
+      <StoryRoll />
+    </>
+  );
 }
 
 export default AboutUs;
-//    position: fixed;
-//    z-index: -4;

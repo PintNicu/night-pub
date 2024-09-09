@@ -11,68 +11,69 @@ import { ref, uploadBytes } from 'firebase/storage';
 
 
 function ImageUploader() {
-    const [selectedImages, setSelectedImages] = useState<string[]>([]);
-    const [imageUpload, setImageUpload] = useState<File | null>(null);
+  const [selectedImages, setSelectedImages] = useState<string[]>([]);
+  const [imageUpload, setImageUpload] = useState<File | null>(null);
 
-    const onSelectedImageHandler = (event: ChangeEvent<HTMLInputElement>) => {
-        const selectedFiles = event.target.files;
-        if (selectedFiles) {
-            const selectedImagesArray = Array.from(selectedFiles);
-            const imagesArray = selectedImagesArray.map((file) => {
-                return URL.createObjectURL(file);
-            });
-            setImageUpload(selectedFiles[0])
-            setSelectedImages([...selectedImages, ...imagesArray]);
-        }
-    };
-
-    const uploadImageHandler = () => {
-      if (imageUpload == null){
-        return;
-      }
-      const randomNumber = Math.floor(1000 + Math.random() * 9000) 
-      const imageRef = ref(storage, `gallery/${imageUpload.name + randomNumber}`)
-      uploadBytes(imageRef, imageUpload).then(() => {
-        alert("Image Uploaded");
-        setSelectedImages([]);
+  const onSelectedImageHandler = (event: ChangeEvent<HTMLInputElement>) => {
+    const selectedFiles = event.target.files;
+    if (selectedFiles) {
+      const selectedImagesArray = Array.from(selectedFiles);
+      const imagesArray = selectedImagesArray.map((file) => {
+        return URL.createObjectURL(file);
       });
+      setImageUpload(selectedFiles[0])
+      setSelectedImages([...selectedImages, ...imagesArray]);
     }
+  };
 
-    const removeImageHandler = (imageToRemove: string) => {
-        setSelectedImages(selectedImages.filter((image) => image !== imageToRemove))
+  const uploadImageHandler = () => {
+    if (imageUpload == null) {
+      return;
     }
+    const randomNumber = Math.floor(1000 + Math.random() * 9000)
+    const imageRef = ref(storage, `gallery/${imageUpload.name + randomNumber}`)
+    uploadBytes(imageRef, imageUpload).then(() => {
+      alert("Image Uploaded");
+      setSelectedImages([]);
+    });
+  }
 
-    return (
-        <section className={styles.centerEverything}>
-  <Form.Group controlId="images" className="text-center">
-    <Form.Label className="d-block">
-      + Imaginile adăugate vor fi postate în galerie!
-      <br />
-    </Form.Label>
-    <Form.Control
-      type="file"
-      name="images"
-      onChange={onSelectedImageHandler}
-      multiple
-      accept="image/png, image/jpeg, image/webp"
-      className="mx-auto d-block"
-    />
-  </Form.Group>
-  <Container className={styles.centerEverything}>
-    {selectedImages && selectedImages.map((image, index) => {
-    return (
-      <Container key={image} className={styles.images}>
-        <img src={image} height="100" alt="upload" className={styles.image} key={index} />
-        <Button className={styles.buttonRemove} variant="outline-warning" onClick={() => removeImageHandler(image)}>
-          <FontAwesomeIcon icon={faTrashCan} style={{color: "#da0b0b"}} />
-        </Button>
+  const removeImageHandler = (imageToRemove: string) => {
+    setSelectedImages(selectedImages.filter((image) => image !== imageToRemove))
+  }
+
+  return (
+
+    <section className={styles.centerEverything}>
+      <Form.Group controlId="images" className="text-center">
+        <Form.Label className="d-block">
+          + Imaginile adăugate vor fi postate în galerie!
+          <br />
+        </Form.Label>
+        <Form.Control
+          type="file"
+          name="images"
+          onChange={onSelectedImageHandler}
+          multiple
+          accept="image/png, image/jpeg, image/webp"
+          className="mx-auto d-block"
+        />
+      </Form.Group>
+      <Container className={styles.centerEverything}>
+        {selectedImages && selectedImages.map((image) => {
+          return (
+            <Container key={image} className={styles.images}>
+              <img src={image} height="100" alt="upload" className={styles.image} key={image} />
+              <Button className={styles.buttonRemove} variant="outline-warning" onClick={() => removeImageHandler(image)}>
+                <FontAwesomeIcon icon={faTrashCan} style={{ color: "#da0b0b" }} />
+              </Button>
+            </Container>
+          )
+        })}
       </Container>
-      )
-    })}
-  </Container>
-    <Button variant="dark" className="mt-2" onClick={uploadImageHandler} >Upload</Button>
-</section>
-    );
+      <Button variant="dark" className="mt-2" onClick={uploadImageHandler} >Upload</Button>
+    </section>
+  );
 }
 
 export default ImageUploader;

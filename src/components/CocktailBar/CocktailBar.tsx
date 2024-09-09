@@ -22,38 +22,55 @@ function CocktailBar() {
       let fetchedCocktails: Cocktail[] = [];
 
       while (fetchedCocktails.length < 5) {
+
         try {
           const res = await axios.get(url);
+
           const cocktail = res.data.drinks[0] as Cocktail;
+
           fetchedCocktails.push(cocktail);
+
         } catch (error) {
           console.error(error);
         }
       }
+
       setCocktails(fetchedCocktails);
       setLoading(false);
+
     };
     fetchData();
   }, []);
 
   if (loading) {
+
     return <div>Loading...</div>;
   }
 
+
   return (
     <Container fluid className={styles.cocktailContainer}>
+
       <Row className={`justify-content-center ${styles.cocktailBarRow}`}>
-        {cocktails.map((cocktail, index) => (
-          <Col key={index} md={2} sm={2} xs={2}>
+
+        {cocktails.map((cocktail) => (
+
+          <Col key={cocktail.strDrink} md={2} sm={2} xs={2}>
+
             <Card className={styles.cocktailCard}>
+
               <Card.Img variant="top" src={cocktail.strDrinkThumb} className={styles.cocktailImage} />
+
               <Card.Body className={styles.cocktailName}>
                 <Card.Title className={styles.cardTitle}>{cocktail.strDrink}</Card.Title>
               </Card.Body>
+
             </Card>
+
           </Col>
         ))}
       </Row>
+
     </Container>
   );
 };

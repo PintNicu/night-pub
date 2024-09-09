@@ -1,33 +1,33 @@
+import React, { lazy, Suspense } from 'react';
+import { Routes, Route } from "react-router-dom";
 import "./App.css";
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Routes, Route } from "react-router-dom";
-import Home from "./pages/Home";
-import AboutUs from "./pages/AboutUs";
-import Menu from "./pages/Menu";
-import Events from "./pages/Events";
-import Gallery from "./pages/Gallery";
-import Contact from "./pages/Contact";
 import Navbar from "./components/Navbar/Navbar";
 import Footer from "./components/Footer/Footer";
-import Dashboard from "./pages/Dahsboard";
 import PrivateRoute from "./components/PrivateRoute/PrivateRoute";
 import { AuthProvider } from "./components/contexts/AuthContext";
 import { EditableInfoProvider } from "./components/contexts/EditeableInfoContext";
-import WebImage from "./components/WebImage/WebImage";
 
+
+const Home = lazy(() => import("./pages/Home"));
+const AboutUs = lazy(() => import("./pages/AboutUs"));
+const Menu = lazy(() => import("./pages/Menu"));
+const Gallery = lazy(() => import("./pages/Gallery"));
+const Contact = lazy(() => import("./pages/Contact"));
+const Dashboard = lazy(() => import("./pages/Dahsboard"));
+const WebImage = lazy(() => import("./components/WebImage/WebImage"));
 
 function App() {
   return (
     <AuthProvider>
       <EditableInfoProvider>
-        <div className="mainDiv" >
+        <div className="mainDiv">
           <Navbar />
-          <div>
+          <Suspense fallback={<div>Loading...</div>}>
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/AboutUs" element={<AboutUs />} />
               <Route path="/Menu" element={<Menu />} />
-              <Route path="/Events" element={<Events />} />
               <Route path="/Gallery" element={<Gallery />} />
               <Route path="/Contact" element={<Contact />} />
               <Route
@@ -40,7 +40,7 @@ function App() {
               />
               <Route path="/images/zepelin-1929-cocktails.jpg" element={<WebImage />} />
             </Routes>
-          </div>
+          </Suspense>
           <Footer />
         </div>
       </EditableInfoProvider>

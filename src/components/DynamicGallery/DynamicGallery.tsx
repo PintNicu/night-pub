@@ -1,84 +1,103 @@
+import React, { useState, useMemo, useEffect } from "react";
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Image from 'react-bootstrap/Image';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
-import { useState, useEffect } from "react";
 import styles from "./DynamicGallery.module.css"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronRight } from '@fortawesome/free-solid-svg-icons';
-import { getStorage, ref, listAll, getDownloadURL } from "firebase/storage";
-
-
-
-
+import useGalleryStore from "../../store/GalleryStore";
 
 function DynamicGallery() {
-  const [firebaseImages, setFirebaseImages] = useState<string[]>([]);
-  const imageContext = (require as any).context("../../Images/GalleryImages", false, /\.(jpg|jpeg|webp)$/);
-  const images: string[] = imageContext.keys().map(imageContext);
+  const { images, isLoading, errorMessage, loadImages } = useGalleryStore();
+  const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
+  const [showModal, setShowModal] = useState(false);
+  const [selectedImageIndex, setSelectedImageIndex] = useState(0);
 
-  const [showImg, setShowImg] = useState(false);
-  const [selectedImgIndex, setSelectedImgIndex] = useState(0);
-
-  const handleShow = (index: number) => {
-    setSelectedImgIndex(index);
-    setShowImg(true);
-  };
-
-  const handleNext = () => {
-    setSelectedImgIndex((prevIndex) => {
-      if (prevIndex === images.length - 1) {
-        return 0;
-      }
-      return prevIndex + 1;
-    });
-  };
-
-  const handlePrevious = () => {
-    setSelectedImgIndex((prevIndex) => {
-      if (prevIndex === 0) {
-        return images.length - 1;
-      }
-      return prevIndex - 1;
-    });
-  };
+  const galleryCategories = ['Bar', 'Evenimente', 'Restaurant'];
 
   useEffect(() => {
-    const storage = getStorage();
-    const imageListRef = ref(storage, 'gallery'); 
+    if (images.length === 0) {
+      loadImages();
+    }
+  }, [loadImages, images.length]);
 
-    listAll(imageListRef)
-      .then((res) => {
-        const urlPromises = res.items.map((imageRef) => {
-          return getDownloadURL(imageRef);
-        });
-  
-        Promise.all(urlPromises)
-          .then((urls) => {
-            setFirebaseImages(urls);
-          })
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }, []);
+  const openImageModal = (index: number) => {
+    setSelectedImageIndex(index);
+    setShowModal(true);
+  };
 
-  const completeGallery = [...images, ...firebaseImages];
+  const showNextImage = () => {
+    setSelectedImageIndex((prevIndex) => (prevIndex + 1) % sortedImages.length);
+  };
+
+  const showPreviousImage = () => {
+    setSelectedImageIndex((prevIndex) =>
+      prevIndex === 0 ? sortedImages.length - 1 : prevIndex - 1
+    );
+  };
+
+  const shuffleImages = (array: any[]) => {
+    for (let i = array.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [array[i], array[j]] = [array[j], array[i]];
+    }
+    return array;
+  };
+
+  const sortedImages = useMemo(() => {
+    if (selectedCategory) {
+
+      const categoryImages = images.filter(image => image.category === selectedCategory);
+
+      const otherImages = images.filter(image => image.category !== selectedCategory);
+
+      const shuffledOtherImages = shuffleImages([...otherImages]);
+
+      return [...categoryImages, ...shuffledOtherImages];
+    }
+    return shuffleImages([...images]);
+  }, [images, selectedCategory]);
+
+  if (isLoading) {
+    return <div>Loading gallery...</div>;
+  }
+
+  if (errorMessage) {
+    return <div>Error: {errorMessage}</div>;
+  }
 
   return (
     <div>
       <Container>
+
+        <div className="mb-3 mt-2 d-flex justify-content-center">
+
+          {galleryCategories.map((category, index) => (
+
+            <React.Fragment key={category}>
+
+              {index > 0 && <span className="mx-2 text-dark">|</span>}
+
+              <Button variant="dark btn-sm" onClick={() => setSelectedCategory(category)}>
+                {category}
+              </Button>
+
+            </React.Fragment>
+          ))}
+        </div>
+
         <Row>
-          {completeGallery.map((imageDir, index) => (
+          {sortedImages.map((image, index) => (
             <Col lg={4} md={4} sm={6} xs={12} key={index} className="mb-4">
               <div
                 className={styles.imageContainer}
-                onClick={() => handleShow(index)}
+                onClick={() => openImageModal(index)}
               >
                 <Image
-                  src={imageDir}
+                  src={image.imageUrl}
                   className={styles.gridImage}
                 />
               </div>
@@ -86,26 +105,31 @@ function DynamicGallery() {
           ))}
         </Row>
 
-        <Modal show={showImg} onHide={() => setShowImg(false)} size="lg"  >
+        <Modal show={showModal} onHide={() => setShowModal(false)} size="lg">
+
           <Modal.Body>
             <img
-              src={images[selectedImgIndex]}
+              src={sortedImages[selectedImageIndex]?.imageUrl}
               alt="Selected"
               className="w-100"
             />
           </Modal.Body>
+
           <Modal.Footer>
-            <Button variant="dark" onClick={handlePrevious}>
+            <Button variant="dark" onClick={showPreviousImage}>
               <FontAwesomeIcon icon={faChevronRight} rotation={180} />
             </Button>
-            <Button variant="dark" onClick={handleNext}>
+
+            <Button variant="dark" onClick={showNextImage}>
               <FontAwesomeIcon icon={faChevronRight} />
             </Button>
           </Modal.Footer>
+
         </Modal>
+
       </Container>
     </div>
   );
 }
 
-export default DynamicGallery
+export default DynamicGallery;

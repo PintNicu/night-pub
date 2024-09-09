@@ -8,11 +8,13 @@ import { useEditableInfo } from "../contexts/EditeableInfoContext";
 
 function Footer() {
   const { editableInfo } = useEditableInfo();
-  
+
   return (
     <footer className="main-footer mt-auto bg-black">
+
       <Container className={styles.footerContainer}>
         <Row className="text-center">
+
           <Col md={4} className={`p-4 ${styles.footerColumn}`}>
             <img src={logo2} alt="" className={styles.footerLogo} />
             <hr className="light" />
@@ -20,6 +22,7 @@ function Footer() {
             <p>{editableInfo.email}</p>
             <p>{editableInfo.address}</p>
           </Col>
+
           <Col md={4} className={`p-4 ${styles.footerColumn}`}>
             <hr className="light" />
             <h5>Program</h5>
@@ -28,6 +31,7 @@ function Footer() {
             <p>{editableInfo.programFS}</p>
             <p>{editableInfo.programSM}</p>
           </Col>
+
           <Col md={4} className={`p-4 ${styles.footerColumn} fluid`}>
             <Ratio className={`frame ${styles.footerFrame}`}>
               <iframe
@@ -39,8 +43,10 @@ function Footer() {
               ></iframe>
             </Ratio>
           </Col>
+
         </Row>
       </Container>
+
     </footer>
   );
 }

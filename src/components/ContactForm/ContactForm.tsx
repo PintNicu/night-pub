@@ -28,8 +28,7 @@ const onSubmit = async (
   values: MyFormValues,
   actions: FormikHelpers<MyFormValues>
 ) => {
-  console.log(values);
-  console.log(actions);
+
 
   emailjs.sendForm("service_4pidr1e", 'template_clkvu4b', '#your-form-id', 'S5qxBAPukSy0uEAkE')
     .then((result: any) => {
@@ -63,19 +62,21 @@ function ContactComponent() {
     onSubmit,
   });
 
-  console.log(errors);
   const { editableInfo } = useEditableInfo();
 
   return (
-    
+
     <Container className={`block ${styles.formCard}`}>
       <Row className={`form ${styles.formColumns}`}>
         <Col md={7} className={styles.formColumn}>
           <h4>Lasă-ne un mesaj</h4>
           <hr />
           <Form id="your-form-id" onSubmit={handleSubmit} autoComplete="off" >
+
             <Form.Label>Nume</Form.Label>
+
             <Form.Group className="mb-3">
+
               <Form.Control
                 name="name"
                 type="text"
@@ -89,11 +90,14 @@ function ContactComponent() {
               {errors.name && touched.name && (
                 <p className={styles.error}>{errors.name}</p>
               )}
+
               <Form.Control.Feedback type="invalid">!</Form.Control.Feedback>
             </Form.Group>
 
             <Form.Group className="mb-3">
+
               <Form.Label>Email</Form.Label>
+
               <Form.Control
                 name="email"
                 type="email"
@@ -113,7 +117,9 @@ function ContactComponent() {
             </Form.Group>
 
             <Form.Group className="mb-3">
+
               <Form.Label>Telefon</Form.Label>
+
               <Form.Control
                 name="phoneNumber"
                 type="phoneNumber"
@@ -132,8 +138,11 @@ function ContactComponent() {
                 <p className={styles.error}>{errors.phoneNumber}</p>
               )}
             </Form.Group>
+
             <Form.Group className="mb-3">
+
               <Form.Label>Mesajul</Form.Label>
+
               <Form.Control
                 name="message"
                 as="textarea"
@@ -152,9 +161,11 @@ function ContactComponent() {
                 <p className={styles.error}>{errors.message}</p>
               )}
             </Form.Group>
+
             <Button disabled={isSubmitting} variant="dark" type="submit" value="Send">
               Trimite
             </Button>
+
           </Form>
         </Col>
 
@@ -163,35 +174,44 @@ function ContactComponent() {
           <hr />
           <div className={`mt-5 `}>
             <div className="d-flex">
+
               <FontAwesomeIcon icon={faLocationDot} className={styles.icon} />
               <p>
                 {editableInfo.cFormAdress}
               </p>
             </div>
+
             <div className="d-flex">
               <FontAwesomeIcon icon={faPhone} className={styles.icon} />
               <p>{editableInfo.cPhone}</p>
             </div>
+
             <div className="d-flex">
               <FontAwesomeIcon icon={faEnvelope} className={styles.icon} />
               <p className={styles.emailInfo}>
                 {editableInfo.cEmail}
               </p>
             </div>
+
             <hr />
+
             <div className="d-flex">
               <FontAwesomeIcon icon={faCalendarAlt} className={styles.icon} />
               <p>Program:</p>
             </div>
+
             <div className="d-flex">
               <p>{editableInfo.programMT}</p>
             </div>
+
             <div className="d-flex">
               <p>{editableInfo.programFS}</p>
             </div>
+
             <div className="d-flex">
               <p>{editableInfo.programSM}</p>
             </div>
+
           </div>
         </Col>
       </Row>

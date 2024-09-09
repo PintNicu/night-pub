@@ -8,9 +8,13 @@ function Home() {
   return (
     <div>
       <ImageSlider />
+
       <CompanyMessageBar />
+
       <WelcomeComponent />
+
       <DeliveryComponent />
+
       <SocialFollowComponent />
     </div>
   );
