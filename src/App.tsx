@@ -9,13 +9,20 @@ import { EditableInfoProvider } from "./components/contexts/EditeableInfoContext
 function App() {
   return (
     <AuthProvider>
+
       <EditableInfoProvider>
         <div className="mainDiv">
+
           <Navbar />
+
           <ContentRoutes />
+
           <Footer />
+
         </div>
+
       </EditableInfoProvider>
+
     </AuthProvider>
   );
 }

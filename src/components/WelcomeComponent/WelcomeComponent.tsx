@@ -6,11 +6,14 @@ import styles from "./WelcomeComponent.module.css";
 function WelcomeComponent() {
   return (
     <Container className={`p-4 ${styles.welcomeComponentContainer}`}>
+
       <Row className="text-center">
         <Col xs={12}>
           <h2 className="display-4">Lorem ipsum!</h2>
         </Col>
+
         <hr className={styles.welcomeComponentHr} />
+
         <Col xs={12}>
           <p className="lead">
             Lorem ipsum, dolor sit amet consectetur adipisicing elit. Beatae
@@ -18,6 +21,7 @@ function WelcomeComponent() {
             vitae est dolor?
           </p>
         </Col>
+
       </Row>
     </Container>
   );
