@@ -43,14 +43,18 @@ function WelcomeComponent() {
 
   return (
     <Container className={`p-4 ${styles.welcomeComponentContainer}`}>
+
       <Row className="text-center">
+
         <Col xs={12}>
           <h2 className="display-4">{currentMessage.shortMessage}</h2>
         </Col>
+
         <hr className={styles.welcomeComponentHr} />
         <Col xs={12}>
           <p className="lead">{currentMessage.longMessage}</p>
         </Col>
+
       </Row>
     </Container>
   );

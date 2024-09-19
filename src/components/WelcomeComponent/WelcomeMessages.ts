@@ -1,5 +1,5 @@
 export const summerMessage = {
-    shortMessage: `Răcorește-ți seara!`,
+    shortMessage: `🌇Răcorește-ți seara!`,
     longMessage: `Simți căldura verii? Vino să te răcorești la barul nostru! Cu o
             atmosferă primitoare și băuturi reci ca gheața, suntem locul perfect
             pentru a-ți potoli setea. De la cocktailuri clasice la creații unice,
@@ -9,7 +9,7 @@ export const summerMessage = {
 
 
 export const winterMessage = {
-    shortMessage: `Încălzește-ți sufletul iarna asta!`,
+    shortMessage: `❄️Încălzește-ți sufletul iarna asta!❄️`,
     longMessage: ` Afară e frig și zăpadă? Vino să te încălzești la barul nostru primitor! 
             Cu o atmosferă caldă și băuturi fierbinți delicioase, suntem refugiul 
             perfect din calea gerului. De la vinul fiert aromat la cocktailuri de 
@@ -20,7 +20,7 @@ export const winterMessage = {
 
 
 export const autumnMessage = {
-    shortMessage: `Savurează aromele toamnei!`,
+    shortMessage: `Savurează aromele toamnei! 🍂`,
     longMessage: `Frunzele cad, iar serile devin mai răcoroase? E momentul perfect să 
             te bucuri de atmosfera caldă și primitoare a barului nostru! Vino să 
             descoperi băuturile noastre de sezon, inspirate din bogăția toamnei. 
@@ -32,7 +32,7 @@ export const autumnMessage = {
 
 
 export const springMessage = {
-    shortMessage: `Celebrează renașterea naturii cu noi!`,
+    shortMessage: `Celebrează renașterea naturii cu noi! 🌞`,
     longMessage: `Pomii înfloresc, iar zilele devin mai lungi și mai calde? E momentul perfect
                   să te bucuri de atmosfera însuflețită și primitoare a barului nostru! Vino să
                   descoperi băuturile noastre de sezon, inspirate din prospețimea primăverii.
@@ -45,7 +45,7 @@ export const springMessage = {
 
 
 export const championshipSeasonMessage = {
-    shortMessage: `Trăiește emoția Campionatului aici!`,
+    shortMessage: `⚽ Trăiește emoția Campionatului aici!`,
     longMessage: `A început sezonul Campionatului și febra fotbalului e în toi! Vino să 
             simți adrenalina fiecărui meci în barul nostru, locul ideal pentru toți 
             pasionații de fotbal. Cu ecrane mari UHD, sunet de calitate și o atmosferă 
