@@ -2,15 +2,18 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import styles from "./MenuIframe.module.css"
-import { useEditableInfo  } from "../contexts/EditeableInfoContext";
+import { useEditableInfo } from "../contexts/EditeableInfoContext";
 
 
 function MenuIframe() {
-  const { editableInfo } = useEditableInfo ();
+  const { editableInfo } = useEditableInfo();
 
   return (
+
     <Container fluid className={styles.iframeContainer}>
+
       <Row className="justify-content-center" >
+
         <Col xs={12}>
           <iframe className={styles.iframe}
             src={editableInfo.menuLink}
@@ -20,7 +23,9 @@ function MenuIframe() {
             title="MenuIframe"
           ></iframe>
         </Col>
+
       </Row>
+
     </Container>
   );
 }

@@ -4,9 +4,11 @@ import Col from "react-bootstrap/Col";
 import styles from "./WelcomeComponent.module.css";
 import { autumnMessage, winterMessage, summerMessage, springMessage, championshipSeasonMessage } from "./WelcomeMessages"
 import { useEffect, useState } from "react";
+import { useEditableInfo } from "../contexts/EditeableInfoContext";
 
 function WelcomeComponent() {
   const [currentMessage, setCurrentMessage] = useState(autumnMessage);
+  const editableInfo = useEditableInfo();
 
   useEffect(() => {
     const updateMessage = () => {
@@ -47,12 +49,12 @@ function WelcomeComponent() {
       <Row className="text-center">
 
         <Col xs={12}>
-          <h2 className="display-4">{currentMessage.shortMessage}</h2>
+          <h2 className="display-4">{editableInfo.welcomeMessageShort ? editableInfo.welcomeMessageShort : currentMessage.shortMessage}</h2>
         </Col>
 
         <hr className={styles.welcomeComponentHr} />
         <Col xs={12}>
-          <p className="lead">{currentMessage.longMessage}</p>
+          <p className="lead">{editableInfo.welcomeMessageLong ? editableInfo.welcomeMessageLong : currentMessage.longMessage}</p>
         </Col>
 
       </Row>
