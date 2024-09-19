@@ -49,12 +49,12 @@ function WelcomeComponent() {
       <Row className="text-center">
 
         <Col xs={12}>
-          <h2 className="display-4">{editableInfo.welcomeMessageShort ? editableInfo.welcomeMessageShort : currentMessage.shortMessage}</h2>
+          <h2 className="display-4">{editableInfo.welcomeMessageShort || currentMessage.shortMessage}</h2>
         </Col>
 
         <hr className={styles.welcomeComponentHr} />
         <Col xs={12}>
-          <p className="lead">{editableInfo.welcomeMessageLong ? editableInfo.welcomeMessageLong : currentMessage.longMessage}</p>
+          <p className="lead">{editableInfo.welcomeMessageLong || currentMessage.longMessage}</p>
         </Col>
 
       </Row>
